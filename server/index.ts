@@ -30,7 +30,9 @@ function setupCors(app: express.Application) {
       origin?.startsWith("http://localhost:") ||
       origin?.startsWith("http://127.0.0.1:");
 
-    if (origin && (origins.has(origin) || isLocalhost)) {
+    const isSameRailwayDomain = origin?.includes("railway.app");
+
+    if (origin && (origins.has(origin) || isLocalhost || isSameRailwayDomain)) {
       res.header("Access-Control-Allow-Origin", origin);
       res.header(
         "Access-Control-Allow-Methods",
